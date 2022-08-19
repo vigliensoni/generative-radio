@@ -1,57 +1,39 @@
 {
 	"pieces": [
 		{
-			"elements": [{
+			"elements": [
+				{
 				"search": {
-					"text": "noise",
+					"text": "voice",
 					"options": {
 						"results": 150,
 						"filter": {
-							"duration": [1, 20, 120]
+							"duration": [10, 20]
 						},
-						"sort": "rating_desc"
+						"sort": "rating_desc",
+						"tags": "girl"
 					}
 				},
 				"structure": {
-					"fade": 0.2,
-					"mono": true,
-					"metro": 2
+					"fade": 0.1,
+					"mono": false,
+					"metro": 10
 				}
 			},
 			{
 				"search": {
-					"text": "keyboard",
+					"text": "cicada",
 					"options": {
 						"results": 150,
 						"filter": {
-							"duration": [1, 20, 120]
+							"duration": [10, 20]
 						},
 						"sort": "rating_desc"
 					}
 				},
 				"structure": {
-					"fade": 0.0,
-					"mono": true
-				}
-			}],
-			"duration": 10,
-			"fade": 10
-		},
-		{
-			"elements": [{
-				"search": {
-					"sound": 339809,
-					"options": {
-						"results": 150,
-						"filter": {
-							"duration": [1, 20]
-						},
-						"sort": "rating_desc"
-					}
-				},
-				"structure": {
-					"mono": true,
-					"fade": 0.4
+					"fade": 0.1,
+					"mono": false
 				}
 			}],
 			"duration": 10,
