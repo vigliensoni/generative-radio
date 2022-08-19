@@ -58,7 +58,7 @@ const Fade = class {
 	}
 
 	fadeOut(timestamp = 0){
-		this.fadeTo(timestamp, 0.001)
+		this.fadeTo(timestamp, 1)
 	}
 
 	fadeTo(timestamp = 0, target) {
