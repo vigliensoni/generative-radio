@@ -1,43 +1,121 @@
 {
-	"pieces": [
-		{
-			"elements": [
-				{
-				"search": {
-					"text": "voice",
-					"options": {
-						"results": 150,
-						"filter": {
-							"duration": [10, 20]
-						},
-						"sort": "rating_desc",
-						"tags": "girl"
-					}
-				},
-				"structure": {
-					"fade": 0.1,
-					"mono": false,
-					"metro": 10
-				}
-			},
-			{
-				"search": {
-					"text": "cicada",
-					"options": {
-						"results": 150,
-						"filter": {
-							"duration": [10, 20]
-						},
-						"sort": "rating_desc"
-					}
-				},
-				"structure": {
-					"fade": 0.1,
-					"mono": false
-				}
-			}],
-			"duration": 10,
-			"fade": 10
-		}
-	]
+  "pieces": [
+    {
+      "elements": [
+        {
+          "search": {
+            "text": "church bells city",
+            "options": {
+              "results": 80,
+              "filter": { "duration": [5, 30] },
+              "sort": "rating_desc"
+            }
+          },
+          "structure": { "metro": 20, "fade": 0.3 }
+        },
+        {
+          "search": {
+            "text": "city park birds",
+            "options": {
+              "results": 100,
+              "filter": { "duration": [15, 45] },
+              "sort": "rating_desc"
+            }
+          },
+          "structure": { "fade": 0.15 }
+        },
+        {
+          "search": {
+            "text": "distant traffic urban",
+            "options": {
+              "results": 60,
+              "filter": { "duration": [10, 40] },
+              "sort": "rating_desc"
+            }
+          },
+          "structure": { "fade": 0.2 }
+        }
+      ],
+      "duration": 180,
+      "fade": 25
+    },
+    {
+      "elements": [
+        {
+          "search": {
+            "text": "subway metro underground",
+            "options": {
+              "results": 100,
+              "filter": { "duration": [5, 25] },
+              "sort": "rating_desc"
+            }
+          },
+          "structure": { "metro": 12, "fade": 0.25, "mono": true }
+        },
+        {
+          "search": {
+            "text": "footsteps crowd",
+            "options": {
+              "results": 80,
+              "filter": { "duration": [3, 15] },
+              "sort": "rating_desc"
+            }
+          },
+          "structure": { "metro": 6, "fade": 0.15 }
+        },
+        {
+          "search": {
+            "text": "urban ambience cafe",
+            "options": {
+              "results": 60,
+              "filter": { "duration": [20, 60] },
+              "sort": "rating_desc"
+            }
+          },
+          "structure": { "fade": 0.1 }
+        }
+      ],
+      "duration": 150,
+      "fade": 20
+    },
+    {
+      "elements": [
+        {
+          "search": {
+            "text": "winter wind cold",
+            "options": {
+              "results": 80,
+              "filter": { "duration": [15, 60] },
+              "sort": "rating_desc"
+            }
+          },
+          "structure": { "fade": 0.2 }
+        },
+        {
+          "search": {
+            "text": "snow footsteps walking",
+            "options": {
+              "results": 60,
+              "filter": { "duration": [3, 12] },
+              "sort": "rating_desc"
+            }
+          },
+          "structure": { "metro": 5, "fade": 0.2, "mono": true }
+        },
+        {
+          "search": {
+            "text": "ice cracking frozen",
+            "options": {
+              "results": 40,
+              "filter": { "duration": [1, 8] },
+              "sort": "rating_desc"
+            }
+          },
+          "structure": { "metro": 15, "fade": 0.3 }
+        }
+      ],
+      "duration": 120,
+      "fade": 30
+    }
+  ]
 }

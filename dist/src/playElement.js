@@ -24,6 +24,10 @@ class default_1 {
     }
     _makePlayer(index, mono, metro) {
         const sound = this.element.sounds[index];
+        if (!sound) {
+            globals_1.state.debug && console.warn('			no sound at index', index, '— skipping');
+            return null;
+        }
         const fadeOptions = {};
         const maxDuration = mono && metro ?
             Math.min(metro, sound.duration) :
@@ -39,9 +43,13 @@ class default_1 {
             ...fadeOptions,
             maxDuration
         });
+        const searchInfo = {
+            text: this.element.search.text,
+            sound: this.element.search.sound
+        };
         player.onstarted = () => {
             globals_1.state.allPlayers.add(player);
-            globals_1.state.ontrigger({ sound, numPlayers: globals_1.state.allPlayers.size });
+            globals_1.state.ontrigger({ sound, searchInfo, numPlayers: globals_1.state.allPlayers.size });
             this.onstarted();
         };
         player.onended = () => {
@@ -54,17 +62,25 @@ class default_1 {
         globals_1.state.debug && console.log('			element start');
         this.playing = true;
         this.element.loaded || this.load();
+        if (!this.element.sounds || this.element.sounds.length === 0) {
+            globals_1.state.debug && console.warn('			element has no sounds — skipping');
+            return Promise.resolve(false);
+        }
         const random = new helpers_1.NoRepetition(this.element.sounds.length, 1, 1);
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve) => {
             const { mono, metro, fade } = this.element.structure;
             if (!this.element.structure.metro) {
                 this.player = this._makePlayer(random.next(), mono, metro);
+                if (!this.player)
+                    return resolve(false);
                 while (this.playing) {
                     await this.newPlayerLoad;
                     await this.player.play();
                     this.started || (this.started = true) && resolve(true);
                     this.nextPlayer = this._makePlayer(random.next(), mono, metro);
+                    if (!this.nextPlayer)
+                        break;
                     this.newPlayerLoad = this.nextPlayer.load();
                     await (0, delay_1.default)((0, helpers_1.sec2ms)(this.player.maxDuration - 1.5 * this.player.fadeDuration));
                     this.player = this.nextPlayer;
@@ -74,6 +90,8 @@ class default_1 {
                 const metroInterval = mono ? metro * (1 - fade) : metro;
                 this.metro = setInterval(async () => {
                     const player = this._makePlayer(random.next(), mono, metro);
+                    if (!player)
+                        return;
                     await player.play();
                     this.started || resolve(true);
                     this.started = true;

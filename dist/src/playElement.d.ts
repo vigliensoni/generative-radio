@@ -3,12 +3,12 @@ export default class _default {
     onstarted: () => void;
     started: boolean;
     playing: boolean;
-    _makePlayer(index: any, mono: any, metro: any): playSound;
+    _makePlayer(index: any, mono: any, metro: any): playSound | null;
     play(): Promise<any>;
-    player: playSound | undefined;
-    nextPlayer: playSound | undefined;
+    player: playSound | null | undefined;
+    nextPlayer: playSound | null | undefined;
     newPlayerLoad: Promise<any> | undefined;
-    metro: NodeJS.Timer | undefined;
+    metro: NodeJS.Timeout | undefined;
     load(): Promise<any>;
     element: any;
     stop(): void;

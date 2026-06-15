@@ -1,0 +1,244 @@
+{
+	"pieces": [
+		{
+			"elements": [
+				{
+					"search": {
+						"text": "birds",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 60],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "park",
+						"options": {
+							"results": 100,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "church bells",
+						"options": {
+							"results": 80,
+							"filter": {
+								"duration": [5, 30],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 25, "fade": 0.3 }
+				}
+			],
+			"duration": 180,
+			"fade": 25
+		},
+		{
+			"elements": [
+				{
+					"search": {
+						"text": "traffic",
+						"options": {
+							"results": 100,
+							"filter": {
+								"duration": [10, 45],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "construction",
+						"options": {
+							"results": 80,
+							"filter": {
+								"duration": [5, 20],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 15, "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "ambulance siren",
+						"options": {
+							"results": 60,
+							"filter": {
+								"duration": [3, 15],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 30, "fade": 0.25, "mono": true }
+				}
+			],
+			"duration": 150,
+			"fade": 20
+		},
+		{
+			"elements": [
+				{
+					"search": {
+						"text": "metro subway",
+						"options": {
+							"results": 100,
+							"filter": {
+								"duration": [5, 30],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 12, "fade": 0.25, "mono": true }
+				},
+				{
+					"search": {
+						"text": "crowd people",
+						"options": {
+							"results": 80,
+							"filter": {
+								"duration": [10, 40],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.1 }
+				},
+				{
+					"search": {
+						"text": "footsteps",
+						"options": {
+							"results": 60,
+							"filter": {
+								"duration": [3, 12],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 5, "fade": 0.15 }
+				}
+			],
+			"duration": 120,
+			"fade": 20
+		},
+		{
+			"elements": [
+				{
+					"search": {
+						"text": "rain",
+						"options": {
+							"results": 100,
+							"filter": {
+								"duration": [20, 60],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "thunder",
+						"options": {
+							"results": 60,
+							"filter": {
+								"duration": [3, 15],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 20, "fade": 0.3 }
+				},
+				{
+					"search": {
+						"text": "water dripping",
+						"options": {
+							"results": 60,
+							"filter": {
+								"duration": [5, 25],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 8, "fade": 0.2, "mono": true }
+				}
+			],
+			"duration": 150,
+			"fade": 30
+		},
+		{
+			"elements": [
+				{
+					"search": {
+						"text": "wind",
+						"options": {
+							"results": 100,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "snow ice",
+						"options": {
+							"results": 60,
+							"filter": {
+								"duration": [2, 10],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 8, "fade": 0.25, "mono": true }
+				},
+				{
+					"search": {
+						"text": "street ambience",
+						"options": {
+							"results": 80,
+							"filter": {
+								"duration": [15, 45],
+								"geotag": [45.45, -73.70, 45.58, -73.50]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				}
+			],
+			"duration": 140,
+			"fade": 25
+		}
+	]
+}

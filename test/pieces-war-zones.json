@@ -1,0 +1,611 @@
+{
+	"pieces": [
+		{
+			"_name": "Palestine",
+			"elements": [
+				{
+					"search": {
+						"text": "birds singing",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 60],
+								"geotag": [31.0, 34.0, 33.0, 36.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "sea waves",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [31.0, 34.0, 33.0, 36.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "muezzin adhan prayer",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [31.0, 34.0, 33.0, 36.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 40, "fade": 0.3 }
+				},
+				{
+					"search": {
+						"text": "children playing laughing",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [5, 25],
+								"geotag": [31.0, 34.0, 33.0, 36.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 12, "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "market crowd",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 45],
+								"geotag": [31.0, 34.0, 33.0, 36.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				}
+			],
+			"duration": 160,
+			"fade": 25
+		},
+		{
+			"_name": "Ukraine",
+			"elements": [
+				{
+					"search": {
+						"text": "birds forest",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 60],
+								"geotag": [44.0, 22.0, 53.0, 41.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "river stream water",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [44.0, 22.0, 53.0, 41.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "church bells orthodox",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [5, 30],
+								"geotag": [44.0, 22.0, 53.0, 41.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 25, "fade": 0.3 }
+				},
+				{
+					"search": {
+						"text": "children playing laughing",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 45]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 30, "fade": 0.25 }
+				},
+				{
+					"search": {
+						"text": "wind grass field",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 40],
+								"geotag": [44.0, 22.0, 53.0, 41.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				}
+			],
+			"duration": 160,
+			"fade": 25
+		},
+		{
+			"_name": "Sudan",
+			"elements": [
+				{
+					"search": {
+						"text": "birds africa",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 60],
+								"geotag": [8.0, 21.0, 23.0, 39.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "rain tropical",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [8.0, 21.0, 23.0, 39.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "mosque prayer chant",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [8.0, 21.0, 23.0, 39.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 35, "fade": 0.3 }
+				},
+				{
+					"search": {
+						"text": "market africa street",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 45],
+								"geotag": [8.0, 21.0, 23.0, 39.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "children singing africa",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [5, 30]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 20, "fade": 0.2 }
+				}
+			],
+			"duration": 150,
+			"fade": 25
+		},
+		{
+			"_name": "Yemen",
+			"elements": [
+				{
+					"search": {
+						"text": "sea ocean calm",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [12.0, 42.0, 19.0, 55.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "birds morning dawn",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 45],
+								"geotag": [12.0, 42.0, 19.0, 55.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "adhan muezzin call",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 40, "fade": 0.3 }
+				},
+				{
+					"search": {
+						"text": "market bazaar spice",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 40]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 15, "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "children playing outside",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [5, 20]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 18, "fade": 0.2 }
+				}
+			],
+			"duration": 150,
+			"fade": 25
+		},
+		{
+			"_name": "Myanmar",
+			"elements": [
+				{
+					"search": {
+						"text": "jungle birds tropical",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 60],
+								"geotag": [9.0, 92.0, 29.0, 102.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "rain forest",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [9.0, 92.0, 29.0, 102.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "temple bells buddhist",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [5, 30],
+								"geotag": [9.0, 92.0, 29.0, 102.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 20, "fade": 0.3 }
+				},
+				{
+					"search": {
+						"text": "market asia street food",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 40],
+								"geotag": [9.0, 92.0, 29.0, 102.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "monks chanting",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 30, "fade": 0.25 }
+				}
+			],
+			"duration": 160,
+			"fade": 25
+		},
+		{
+			"_name": "Syria",
+			"elements": [
+				{
+					"search": {
+						"text": "birds",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 60],
+								"geotag": [32.0, 35.0, 38.0, 43.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "water fountain",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 60],
+								"geotag": [32.0, 35.0, 38.0, 43.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "mosque adhan",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [32.0, 35.0, 38.0, 43.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 35, "fade": 0.3 }
+				},
+				{
+					"search": {
+						"text": "church bells",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [5, 25],
+								"geotag": [32.0, 35.0, 38.0, 43.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 30, "fade": 0.25 }
+				},
+				{
+					"search": {
+						"text": "souk market crowd",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 45],
+								"geotag": [32.0, 35.0, 38.0, 43.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				}
+			],
+			"duration": 160,
+			"fade": 25
+		},
+		{
+			"_name": "Ethiopia",
+			"elements": [
+				{
+					"search": {
+						"text": "birds",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 60],
+								"geotag": [5.0, 32.0, 16.0, 48.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "water river",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [5.0, 32.0, 16.0, 48.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "church orthodox chant",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [5.0, 32.0, 16.0, 48.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 30, "fade": 0.25 }
+				},
+				{
+					"search": {
+						"text": "market africa voices",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 40],
+								"geotag": [5.0, 32.0, 16.0, 48.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "children singing school",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 40]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 25, "fade": 0.2 }
+				}
+			],
+			"duration": 150,
+			"fade": 25
+		},
+		{
+			"_name": "DR Congo",
+			"elements": [
+				{
+					"search": {
+						"text": "jungle forest ambience",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60],
+								"geotag": [-6.0, 26.0, 3.0, 32.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "birds tropical",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 45],
+								"geotag": [-6.0, 26.0, 3.0, 32.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "church choir singing africa",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [15, 60]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 30, "fade": 0.25 }
+				},
+				{
+					"search": {
+						"text": "market village africa",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [10, 45],
+								"geotag": [-6.0, 26.0, 3.0, 32.0]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "children playing singing",
+						"options": {
+							"results": 150,
+							"filter": {
+								"duration": [5, 25]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 15, "fade": 0.2 }
+				}
+			],
+			"duration": 160,
+			"fade": 25
+		}
+	]
+}

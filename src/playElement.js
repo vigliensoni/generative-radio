@@ -21,6 +21,10 @@ export default class {
 
 	_makePlayer(index, mono, metro) {
 		const sound = this.element.sounds[index]
+		if (!sound) {
+			state.debug && console.warn('			no sound at index', index, '— skipping')
+			return null
+		}
 		const fadeOptions = {}
 		const maxDuration = mono && metro ?
 			Math.min(metro, sound.duration) :
@@ -40,9 +44,13 @@ export default class {
 				maxDuration
 			}
 		)
+		const searchInfo = {
+			text: this.element.search.text,
+			sound: this.element.search.sound
+		}
 		player.onstarted = () => {
 			state.allPlayers.add(player)
-			state.ontrigger({sound, numPlayers: state.allPlayers.size})
+			state.ontrigger({sound, searchInfo, numPlayers: state.allPlayers.size})
 			this.onstarted()
 		}
 		player.onended = () => {
@@ -56,6 +64,10 @@ export default class {
 		state.debug && console.log('			element start')
 		this.playing = true
 		this.element.loaded || this.load()
+		if (!this.element.sounds || this.element.sounds.length === 0) {
+			state.debug && console.warn('			element has no sounds — skipping')
+			return Promise.resolve(false)
+		}
 		const random = new NoRepetition(this.element.sounds.length, 1, 1)
 		// eslint-disable-next-line no-async-promise-executor
 		return new Promise(async (resolve) => {
@@ -66,6 +78,7 @@ export default class {
 					mono,
 					metro
 				)
+				if (!this.player) return resolve(false)
 				while (this.playing) {
 					await this.newPlayerLoad
 					await this.player.play()
@@ -76,6 +89,7 @@ export default class {
 						mono,
 						metro
 					)
+					if (!this.nextPlayer) break
 					this.newPlayerLoad = this.nextPlayer.load()
 					await delay(sec2ms(this.player.maxDuration - 1.5 * this.player.fadeDuration))
 					this.player = this.nextPlayer
@@ -89,6 +103,7 @@ export default class {
 							mono,
 							metro
 						)
+						if (!player) return
 						await player.play()
 						this.started || resolve(true)
 						this.started = true
