@@ -38,7 +38,7 @@ export default class {
 		delay(sec2ms(this.maxDuration - this.fadeDuration)).then(() => {
 			this.fade.fadeOut()
 		})
-		delay(sec2ms(this.maxDuration)).then(this.stop)
+		delay(sec2ms(this.maxDuration)).then(() => this.stop())
 		this.onstarted()
 		return this.source
 	}
@@ -54,13 +54,12 @@ export default class {
 		state.debug && console.log('				sound loaded!')
 		return this.source
 	}
-	
+
 	stop() {
-		if (this) {
+		if (this.active) {
 			state.debug && console.log('				sound stop')
 			this.active = false
 			this.source.stop()
-			this.onended()
 		}
 	}
 }

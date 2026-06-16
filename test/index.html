@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Generative Radio</title>
+  <title>field (before | after)</title>
   <script type="module" src="dist/index.js" charset="utf-8"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,8 +12,8 @@
 
 <body>
   <div class="overlay" id="overlay">
-    <div class="title">SOUNDS</div>
-    <div class="subtitle">from a distant world </div>
+    <div class="title">FIELD</div>
+    <div class="subtitle">before | after </div>
     <button class="start" id="startBtn">LISTEN</button>
   </div>
 
@@ -220,7 +220,7 @@
 
   .log-line .sound-name {
     display: block;
-    font-size: clamp(1.3rem, 4vw, 3.2rem);
+    font-size: clamp(0.85rem, 2vw, 1.6rem);
     font-weight: 300;
     color: #fff;
     margin-bottom: 0.3em;
@@ -230,7 +230,7 @@
 
   .log-line .sound-meta {
     display: block;
-    font-size: clamp(0.6rem, 1.5vw, 1.1rem);
+    font-size: clamp(0.5rem, 1vw, 0.72rem);
     font-weight: 300;
     color: #666;
     letter-spacing: 0.05em;
@@ -257,9 +257,63 @@
     color: #555;
   }
 
-  .log-line.fading {
-    transition: opacity 4s ease;
-    opacity: 0.2 !important;
+  .log-line .username-tag {
+    color: #3a3a3a;
+  }
+
+  .log-line .year-tag {
+    color: #3a3a3a;
+  }
+
+  .log-line .license-tag {
+    color: #2e2e2e;
+    font-style: italic;
+  }
+
+  .log-line .sound-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35em;
+    margin-top: 0.6em;
+  }
+
+  .log-line .tag {
+    font-size: clamp(0.4rem, 0.7vw, 0.52rem);
+    font-weight: 300;
+    color: #2e2e2e;
+    letter-spacing: 0.04em;
+    padding: 0.15em 0.5em;
+    border: 1px solid #1c1c1c;
+  }
+
+  .progress-bar {
+    height: 1px;
+    background: #1a1a1a;
+    margin-top: 0.75em;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: #3a3a3a;
+    width: 0%;
+  }
+
+  .log-line a.sound-name {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .log-line a.sound-name:hover {
+    color: #aaa;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .log-line.exiting {
+    transition: opacity 2s ease;
+    opacity: 0 !important;
+    pointer-events: none;
   }
 
   /* --- CONTROLS --- */
@@ -371,11 +425,11 @@
     }
 
     .log-line .sound-name {
-      font-size: clamp(1.1rem, 5vw, 1.6rem);
+      font-size: clamp(0.75rem, 3.5vw, 1.1rem);
     }
 
     .log-line .sound-meta {
-      font-size: clamp(0.55rem, 2.5vw, 0.75rem);
+      font-size: clamp(0.45rem, 2vw, 0.62rem);
     }
 
     .now-location {
@@ -403,11 +457,11 @@
 
   @media (min-width: 601px) and (max-width: 1024px) {
     .log-line .sound-name {
-      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-size: clamp(0.9rem, 2.2vw, 1.4rem);
     }
 
     .log-line .sound-meta {
-      font-size: clamp(0.65rem, 1.4vw, 0.9rem);
+      font-size: clamp(0.5rem, 1.1vw, 0.7rem);
     }
   }
 
@@ -427,7 +481,7 @@
     }
 
     .log-line .sound-name {
-      font-size: 3.5rem;
+      font-size: 1.8rem;
     }
   }
 </style>

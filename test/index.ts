@@ -11,8 +11,6 @@ fetch(window.location.origin+'/token')
 
 gen.debug = false
 
-const MAX_LINES = 12
-
 const geotagToLocation = (geotag: string | null): string => {
 	if (!geotag) return ''
 	const [lat, lon] = geotag.split(' ').map(Number)
@@ -36,11 +34,31 @@ const geotagToCoords = (geotag: string | null): string => {
 const logContainer = document.getElementById('logContainer')!
 const nowLocation = document.getElementById('nowLocation')!
 
-const addLogLine = (name: string, query: string, location: string, coords: string, duration: string) => {
-	// mark previous lines as fading
-	const existing = logContainer.querySelectorAll('.log-line:not(.fading)')
-	existing.forEach((el) => el.classList.add('fading'))
+interface SoundEntry {
+	line: HTMLElement
+	fill: HTMLElement
+	startTime: number
+	duration: number
+}
 
+const activeSounds = new Map<any, SoundEntry>()
+let rafId: number | null = null
+
+const tickProgress = () => {
+	const now = performance.now()
+	for (const entry of activeSounds.values()) {
+		const pct = Math.min((now - entry.startTime) / (entry.duration * 1000), 1) * 100
+		entry.fill.style.width = `${pct}%`
+	}
+	rafId = requestAnimationFrame(tickProgress)
+}
+
+const exitLine = (el: HTMLElement) => {
+	el.classList.add('exiting')
+	setTimeout(() => el.remove(), 2000)
+}
+
+const showSound = (sound: any, query: string, location: string, coords: string, duration: string, playDuration: number, tags: string[], username: string, url: string, license: string, created: string) => {
 	const line = document.createElement('div')
 	line.className = 'log-line'
 
@@ -48,43 +66,63 @@ const addLogLine = (name: string, query: string, location: string, coords: strin
 	const coordsPart = coords ? `<span class="coords-tag">${coords}</span> ` : ''
 	const searchPart = `<span class="search-tag">${query}</span>`
 	const durationPart = `<span class="duration-tag">${duration}s</span>`
+	const userPart = username ? ` · <span class="username-tag">by ${username}</span>` : ''
+	const yearPart = created ? ` · <span class="year-tag">${created.slice(0, 4)}</span>` : ''
+	const licensePart = license ? ` · <span class="license-tag">${license.replace('http://creativecommons.org/licenses/', 'CC ').replace(/\/.*/, '').toUpperCase()}</span>` : ''
+
+	const nameHtml = url
+		? `<a class="sound-name" href="${url}" target="_blank" rel="noopener">${sound.name}</a>`
+		: `<span class="sound-name">${sound.name}</span>`
+
+	const tagsPart = tags && tags.length > 0
+		? `<span class="sound-tags">${tags.map(t => `<span class="tag">${t}</span>`).join('')}</span>`
+		: ''
 
 	line.innerHTML = `
-		<span class="sound-name">${name}</span>
-		<span class="sound-meta">${locationPart}${coordsPart}${searchPart} ${durationPart}</span>
+		${nameHtml}
+		<span class="sound-meta">${locationPart}${coordsPart}${searchPart} ${durationPart}${userPart}${yearPart}${licensePart}</span>
+		${tagsPart}
+		<div class="progress-bar"><div class="progress-fill"></div></div>
 	`
 	logContainer.appendChild(line)
 
-	// update location display
+	const fill = line.querySelector('.progress-fill') as HTMLElement
+	activeSounds.set(sound, {line, fill, startTime: performance.now(), duration: playDuration})
+
 	if (location) {
 		nowLocation.textContent = location
 		nowLocation.classList.add('active')
 	}
-
-	// trim old lines
-	const lines = logContainer.querySelectorAll('.log-line')
-	if (lines.length > MAX_LINES) {
-		const toRemove = lines.length - MAX_LINES
-		for (let i = 0; i < toRemove; i++) {
-			lines[i].remove()
-		}
-	}
 }
 
-gen.ontrigger = ({sound, searchInfo}) => {
-	if (sound) {
+const clearSound = (sound: any) => {
+	const entry = activeSounds.get(sound)
+	if (!entry) return
+	activeSounds.delete(sound)
+	exitLine(entry.line)
+}
+
+gen.ontrigger = ({sound, searchInfo, ended, maxDuration}) => {
+	if (sound && !ended) {
 		const query = searchInfo?.text || `similar to #${searchInfo?.sound}`
 		const location = geotagToLocation(sound.geotag)
 		const coords = geotagToCoords(sound.geotag)
 		const duration = sound.duration.toFixed(1)
+		const playDuration: number = maxDuration ?? sound.duration
+		const tags: string[] = sound.tags || []
+		const username: string = sound.username || ''
+		const url: string = sound.url || ''
+		const license: string = sound.license || ''
+		const created: string = sound.created || ''
 
-		// HTML log
-		addLogLine(sound.name, query, location, coords, duration)
+		showSound(sound, query, location, coords, duration, playDuration, tags, username, url, license, created)
 
-		// Console log
 		const locStr = location || 'no geotag'
 		const coordsStr = sound.geotag ? `[${sound.geotag}]` : '[—]'
-		console.log(`Playing: "${sound.name}" | search: "${query}" | ${locStr} ${coordsStr} | ${duration}s`)
+		const tagsStr = tags.length > 0 ? ` | tags: ${tags.join(', ')}` : ''
+		console.log(`Playing: "${sound.name}" | search: "${query}" | ${locStr} ${coordsStr} | ${duration}s | by ${username}${tagsStr}`)
+	} else if (ended && sound) {
+		clearSound(sound)
 	}
 }
 
@@ -95,13 +133,16 @@ document.getElementById('startBtn')!.addEventListener('click', () => {
 	overlay.classList.add('hidden')
 	setTimeout(() => player.classList.add('visible'), 500)
 	gen.play()
+	if (!rafId) rafId = requestAnimationFrame(tickProgress)
 })
 
 document.getElementById('stopBtn')!.addEventListener('click', () => {
 	gen.stop()
+	if (rafId) { cancelAnimationFrame(rafId); rafId = null }
 	overlay.classList.remove('hidden')
 	player.classList.remove('visible')
 	logContainer.innerHTML = ''
+	activeSounds.clear()
 	nowLocation.textContent = ''
 	nowLocation.classList.remove('active')
 })

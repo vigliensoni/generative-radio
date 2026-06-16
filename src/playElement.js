@@ -50,12 +50,12 @@ export default class {
 		}
 		player.onstarted = () => {
 			state.allPlayers.add(player)
-			state.ontrigger({sound, searchInfo, numPlayers: state.allPlayers.size})
+			state.ontrigger({sound, searchInfo, maxDuration, numPlayers: state.allPlayers.size})
 			this.onstarted()
 		}
 		player.onended = () => {
 			state.allPlayers.delete(player)
-			state.ontrigger({numPlayers: state.allPlayers.size})
+			state.ontrigger({sound, searchInfo, ended: true, numPlayers: state.allPlayers.size})
 		}
 		return player
 	}

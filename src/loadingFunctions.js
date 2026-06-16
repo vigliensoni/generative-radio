@@ -28,16 +28,20 @@ const formattingOptions = (options) => {
 const MIN_SOUNDS = 10
 
 const searchSounds = async (element, options) => {
-	if (element.search.text !== undefined) {
-		const {results} = await state.freesound.textSearch(
-			element.search.text,
-			options
-		)
-		return results
-	} else if (element.search.sound !== undefined) {
-		const sound = await state.freesound.getSound(element.search.sound)
-		const {results} = await sound.getSimilar(options)
-		return results
+	try {
+		if (element.search.text !== undefined) {
+			const {results} = await state.freesound.textSearch(
+				element.search.text,
+				options
+			)
+			return results
+		} else if (element.search.sound !== undefined) {
+			const sound = await state.freesound.getSound(element.search.sound)
+			const {results} = await sound.getSimilar(options)
+			return results
+		}
+	} catch (e) {
+		state.debug && console.warn('		search failed:', e.message || e)
 	}
 	return []
 }

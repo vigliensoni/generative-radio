@@ -53,18 +53,18 @@ const Fade = class {
 		Object.assign(this, {context, gainNode, duration})
 	}
 
-	fadeIn(timestamp = 0){
-		this.fadeTo(timestamp, 1)
+	fadeIn(timestamp = 0) {
+		this.fadeTo(timestamp, 0.001, 1)
 	}
 
-	fadeOut(timestamp = 0){
-		this.fadeTo(timestamp, 1)
+	fadeOut(timestamp = 0) {
+		this.fadeTo(timestamp, 1, 0)
 	}
 
-	fadeTo(timestamp = 0, target) {
-		console.log(target, this.context.currentTime, this.duration)
-		this.gainNode.gain.setValueAtTime(parseFloat(this.gainNode.gain.value), this.context.currentTime + timestamp)
-		this.gainNode.gain.exponentialRampToValueAtTime(target, this.context.currentTime + this.duration)
+	fadeTo(timestamp, from, to) {
+		const t = this.context.currentTime + timestamp
+		this.gainNode.gain.setValueAtTime(from, t)
+		this.gainNode.gain.linearRampToValueAtTime(to, t + this.duration)
 	}
 }
 

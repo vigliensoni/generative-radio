@@ -26,7 +26,7 @@ export default class {
 			this.elementPlayers = this.piece.elements.map((element) => new playElement(element, this.gain))
 			await Promise.any(this.elementPlayers.map((e) => e.play()))
 			this.fade.fadeIn()
-			this.stop(sec2ms(state.context.currentTime + this.piece.duration))
+			this.stop(this.piece.duration)
 		}
 	}
 
