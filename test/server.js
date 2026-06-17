@@ -7,10 +7,13 @@ require('dotenv').config()
 const port = 3000
 
 webpack(webpackConfig, (err, stats) => {
-  if (err || stats.hasErrors()) {
-    console.log('err')
+  if (err) {
+    console.error(err)
+  } else if (stats.hasErrors()) {
+    console.error(stats.toString({ colors: true }))
+  } else {
+    console.log('ok')
   }
-	console.log('ok')
 });
 
 

@@ -23,15 +23,31 @@ import GenerativeRadio from 'generative-radio'
 import pieces from './pieces.json'
 
 const gen = new GenerativeRadio(pieces)
-gen.token = 'YOUR_FREESOUND_API_TOKEN'
 ```
 
-### 3. Start playback
+### 3. Load the token before enabling playback
+
+The Freesound API token must be set before `play()` is called. Fetch it asynchronously and disable the play button until it's ready to avoid a race condition that causes 401 errors:
+
+```javascript
+const playBtn = document.querySelector('#play')
+playBtn.disabled = true
+
+fetch('/token')
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.text() })
+  .then(token => {
+    gen.token = token.trim()
+    playBtn.disabled = false
+  })
+  .catch(err => console.error('Token fetch failed:', err))
+```
+
+### 4. Start playback
 
 Playback must be triggered from a user gesture (browser autoplay policy):
 
 ```javascript
-document.querySelector('#play').addEventListener('click', () => {
+playBtn.addEventListener('click', () => {
   gen.play()
 })
 ```
@@ -58,8 +74,8 @@ const gen = new GenerativeRadio(pieces)
 |---|---|---|
 | `gen.token = value` | `string` | Sets the Freesound API token. Required before calling `play()`. |
 | `gen.gain = value` | `number` (0–1) | Sets the master output volume. |
-| `gen.debug = value` | `boolean` | Enables console logging of the playback lifecycle. |
-| `gen.ontrigger = fn` | `function` | Callback fired every time a sound starts or ends. Receives `{ sound, numPlayers }`. |
+| `gen.debug = value` | `boolean` | Enables verbose console logging of loading and playback (see Debug Logging below). |
+| `gen.ontrigger = fn` | `function` | Callback fired every time a sound starts or ends. Receives `{ sound, searchInfo, ended, maxDuration, numPlayers }`. |
 | `gen.playing` | `boolean` (read-only) | Whether playback is currently active. |
 
 ### Methods
@@ -71,15 +87,27 @@ const gen = new GenerativeRadio(pieces)
 
 ### The `ontrigger` callback
 
+Fired every time a sound starts or ends. Receives a single object:
+
+| Property | Type | Description |
+|---|---|---|
+| `sound` | `object` | Freesound metadata for the sound (name, duration, geotag, tags, username, url, license, created, previews). |
+| `searchInfo` | `object` | The search query that found this sound: `{ text }` for text searches or `{ sound }` for similar-sound searches. |
+| `ended` | `boolean` | `true` when the sound has finished; `false` (or absent) when it starts. |
+| `maxDuration` | `number` | How long the sound will actually play, in seconds (may be shorter than the sound's full duration due to `metro` or duration filters). |
+| `numPlayers` | `number` | Number of sounds currently playing (including this one on start; excluding it on end). |
+
 ```javascript
-gen.ontrigger = ({ sound, numPlayers }) => {
-  // sound: metadata object of the sound that just started (or undefined on end)
-  // numPlayers: number of sounds currently playing
-  console.log(`Now playing: ${sound?.name} — ${numPlayers} active voices`)
+gen.ontrigger = ({ sound, searchInfo, ended, maxDuration, numPlayers }) => {
+  if (sound && !ended) {
+    console.log(`▶ "${sound.name}" | search: "${searchInfo?.text}" | ${maxDuration.toFixed(1)}s | ${numPlayers} voices`)
+  } else if (ended && sound) {
+    console.log(`■ "${sound.name}" ended`)
+  }
 }
 ```
 
-This is useful for building reactive UIs that display what's currently playing.
+This is useful for building reactive UIs that display what's currently playing, with per-sound progress tracking.
 
 ## Configuration Schema
 
@@ -121,6 +149,7 @@ An element defines a single sound layer within a piece — what sounds to fetch 
 | `search.options.results` | `number` | `150` | Number of sounds to fetch. Capped at 150 by the Freesound API. |
 | `search.options.filter.duration` | `[min, max]` | `[0, 60]` | Duration range in seconds. Use `"*"` for no upper limit, e.g. `[0, "*"]`. |
 | `search.options.filter.geotag` | `[min_lat, min_lon, max_lat, max_lon]` | — | Bounding box for geolocation filtering. Only returns sounds that were geotagged within this rectangle. Coordinates are decimal degrees (WGS 84). |
+| `search.options.filter.geotags` | `array` | — | Array of bounding boxes (each `[min_lat, min_lon, max_lat, max_lon]`). One parallel search is fired per entry and results are merged. Use this to search across multiple locations simultaneously. Requires the `resolveLocations` pre-processing step if using named strings (see below). |
 | `search.options.sort` | `string` | `"rating_desc"` | Sort order for results. Highest rated first by default. |
 | `search.options.tags` | `string` | — | Filter results by Freesound tags. Optional. |
 
@@ -128,9 +157,9 @@ These defaults are defined in `src/globals.js` and merged into every element via
 
 #### Geolocation filtering
 
-Many sounds on Freesound are geotagged by their uploaders with the coordinates of the recording location. The `geotag` filter lets you restrict results to sounds recorded within a geographic bounding box, defined as `[min_lat, min_lon, max_lat, max_lon]` in decimal degrees.
+Many sounds on Freesound are geotagged by their uploaders with the coordinates of the recording location. Two geolocation fields are supported:
 
-For example, to fetch only sounds recorded in Montréal:
+**`geotag`** — a single bounding box `[min_lat, min_lon, max_lat, max_lon]` in decimal degrees. Only returns sounds recorded within that rectangle.
 
 ```json
 {
@@ -147,7 +176,85 @@ For example, to fetch only sounds recorded in Montréal:
 }
 ```
 
-Note that geotag filtering only returns sounds whose uploaders chose to tag their location, so the result pool will typically be smaller than a text-only search. You can combine `geotag` with `text` and `duration` filters freely — all filters are ANDed together.
+**`geotags`** — an array of bounding boxes. One parallel Freesound search is fired per entry and all results are merged into a single pool. Use this to search across multiple regions simultaneously.
+
+```json
+{
+  "search": {
+    "text": "birds nature",
+    "options": {
+      "filter": {
+        "duration": [10, 60],
+        "geotags": [
+          [31.0, 34.0, 33.0, 36.0],
+          [44.0, 22.0, 53.0, 41.0]
+        ]
+      }
+    }
+  }
+}
+```
+
+**Fallback behavior** — because geotag coverage on Freesound is sparse, a location-specific search often returns fewer sounds than needed. When results fall below the minimum threshold (`MIN_SOUNDS = 10`):
+
+- For `geotag`: the geotag filter is removed and the same text search runs globally.
+- For `geotags`: a broad fallback search (`"recording"`) is run within the *same geotag bounding boxes*, so sounds always come from the specified locations. A global fallback is never used for `geotags`.
+
+Note that geotag filtering only returns sounds whose uploaders chose to tag their location, so the result pool will typically be smaller than a text-only search.
+
+#### Named locations with `_locations`
+
+To avoid repeating coordinate arrays in every element, you can define a `_locations` dictionary at the top level of your config and reference locations by name inside `geotags` arrays. A `resolveLocations()` pre-processing step (run before passing the config to `GenerativeRadio`) replaces name strings with coordinate arrays.
+
+```json
+{
+  "_locations": {
+    "Palestine": [31.0, 34.0, 33.0, 36.0],
+    "Ukraine":   [44.0, 22.0, 53.0, 41.0],
+    "Chile":     [-56.0, -75.5, -17.5, -66.0]
+  },
+  "pieces": [
+    {
+      "elements": [
+        {
+          "search": {
+            "text": "birds nature",
+            "options": {
+              "filter": {
+                "geotags": ["Palestine", "Ukraine"]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+The `resolveLocations` helper (used in the test harness `test/index.ts`):
+
+```typescript
+const resolveLocations = (config: any) => {
+  const locs = config._locations || {}
+  const resolved = JSON.parse(JSON.stringify(config))
+  for (const piece of resolved.pieces || []) {
+    for (const element of piece.elements || []) {
+      const geotags = element.search?.options?.filter?.geotags
+      if (Array.isArray(geotags)) {
+        element.search.options.filter.geotags = geotags
+          .map((g: any) => typeof g === 'string' ? locs[g] : g)
+          .filter(Boolean)
+      }
+    }
+  }
+  return resolved
+}
+
+const gen = new GenerativeRadio(resolveLocations(config))
+```
+
+Any location name not found in `_locations` is silently dropped (filtered out).
 
 #### `structure` — how to play them
 
@@ -219,7 +326,7 @@ Sound GainNode → Piece GainNode → Master GainNode → AudioContext.destinati
    (per sound)      (per piece)      (gen.gain)           (speakers)
 ```
 
-Fades at every level use `exponentialRampToValueAtTime` for smooth, perceptually even transitions.
+Fades at every level use `linearRampToValueAtTime` for smooth transitions. (`exponentialRampToValueAtTime` cannot target a value of 0, so linear ramping is used instead.)
 
 ## Piece Sequencing
 
@@ -297,6 +404,25 @@ These can be used independently if you want finer-grained control over the playb
 
 This configuration defines two pieces that alternate in shuffled order. The first piece layers continuous rain with periodic thunder. The second layers rapid percussive hits (from sounds similar to Freesound #339809) with a continuous bed of birdsong.
 
+## Debug Logging
+
+Set `gen.debug = true` to enable verbose console output during loading and playback. When using `geotags`, the log shows each location being searched and how many sounds each returns:
+
+```
+geotag[0] specific search: Intersects(34,31,36,33)   ← Palestine
+geotag[1] specific search: Intersects(22,44,41,53)   ← Ukraine
+geotag[0] returned 0 sound(s)
+geotag[1] returned 0 sound(s)
+only 0 sound(s) total, broadening search within all locations
+geotag[0] broad fallback: Intersects(34,31,36,33)
+geotag[1] broad fallback: Intersects(22,44,41,53)
+geotag[0] broad returned 22 sound(s)
+geotag[1] broad returned 50 sound(s)
+element pool: 72 sound(s) from 2 location(s)
+```
+
+This is useful for verifying that all locations are being queried and to diagnose why an element might have a thin sound pool.
+
 ## Running the Test Environment
 
 ```bash
@@ -307,7 +433,9 @@ echo "TOKEN=YOUR_API_TOKEN" > .env
 npm test
 ```
 
-This starts a local server at `http://localhost:3000` with a minimal UI (play/stop buttons and a volume slider).
+This starts a local server at `http://localhost:3000` with a minimal UI (play/stop buttons, volume slider, and a live sound log).
+
+**Important:** The webpack bundle is built once on server startup. Any changes to source files or JSON config files require restarting the server (`npm test`) to take effect. If sounds don't match your config edits, restart first.
 
 ## Development
 

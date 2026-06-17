@@ -1,15 +1,48 @@
 import Generative from '../dist/src/index'
-// import pieces from './pieces-montreal.json'
-// import pieces from './pieces-palestine.json'
-import pieces from './pieces-war-zones.json'
+// import rawPieces from './pieces-montreal.json'
+// import rawPieces from './pieces-palestine.json'
+// import rawPieces from './pieces-war-zones.json'
+import rawPieces from './pieces-chile.json'
 
-const gen = new Generative(pieces)
+const resolveLocations = (config: any) => {
+	const locs: Record<string, number[]> = config._locations || {}
+	const resolved = JSON.parse(JSON.stringify(config))
+	for (const piece of resolved.pieces || []) {
+		for (const element of piece.elements || []) {
+			const geotags = element.search?.options?.filter?.geotags
+			if (Array.isArray(geotags)) {
+				element.search.options.filter.geotags = geotags
+					.map((g: any) => typeof g === 'string' ? locs[g] : g)
+					.filter(Boolean)
+			}
+		}
+	}
+	return resolved
+}
+
+const gen = new Generative(resolveLocations(rawPieces))
+
+const startBtn = document.getElementById('startBtn') as HTMLButtonElement
+startBtn.disabled = true
 
 fetch(window.location.origin+'/token')
-	.then((response) => response.text())
-	.then((token) => { gen.token = token })
+	.then((response) => {
+		if (!response.ok) throw new Error(`token fetch failed: ${response.status}`)
+		return response.text()
+	})
+	.then((token) => {
+		const trimmed = token.trim()
+		if (!trimmed) throw new Error('token is empty — check TOKEN in .env')
+		gen.token = trimmed
+		startBtn.disabled = false
+		console.log('token loaded, ready to play')
+	})
+	.catch((err) => {
+		console.error(err)
+		startBtn.textContent = 'Token error — check console'
+	})
 
-gen.debug = false
+gen.debug = true
 
 const geotagToLocation = (geotag: string | null): string => {
 	if (!geotag) return ''
@@ -22,6 +55,7 @@ const geotagToLocation = (geotag: string | null): string => {
 	if (lat >= 32 && lat <= 38 && lon >= 35 && lon <= 43) return 'Syria'
 	if (lat >= 5 && lat <= 16 && lon >= 32 && lon <= 48) return 'Ethiopia'
 	if (lat >= -6 && lat <= 3 && lon >= 26 && lon <= 32) return 'DR Congo'
+	if (lat >= -56 && lat <= -17.5 && lon >= -75.5 && lon <= -66) return 'Chile'
 	return `${lat.toFixed(2)}°, ${lon.toFixed(2)}°`
 }
 
@@ -129,7 +163,7 @@ gen.ontrigger = ({sound, searchInfo, ended, maxDuration}) => {
 const overlay = document.getElementById('overlay')!
 const player = document.getElementById('player')!
 
-document.getElementById('startBtn')!.addEventListener('click', () => {
+startBtn.addEventListener('click', () => {
 	overlay.classList.add('hidden')
 	setTimeout(() => player.classList.add('visible'), 500)
 	gen.play()

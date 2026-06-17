@@ -49,12 +49,12 @@ class default_1 {
         };
         player.onstarted = () => {
             globals_1.state.allPlayers.add(player);
-            globals_1.state.ontrigger({ sound, searchInfo, numPlayers: globals_1.state.allPlayers.size });
+            globals_1.state.ontrigger({ sound, searchInfo, maxDuration, numPlayers: globals_1.state.allPlayers.size });
             this.onstarted();
         };
         player.onended = () => {
             globals_1.state.allPlayers.delete(player);
-            globals_1.state.ontrigger({ numPlayers: globals_1.state.allPlayers.size });
+            globals_1.state.ontrigger({ sound, searchInfo, ended: true, numPlayers: globals_1.state.allPlayers.size });
         };
         return player;
     }

@@ -2,7 +2,7 @@ export const Fade: {
     new (context: any, gainNode: any, duration: any): {
         fadeIn(timestamp?: number): void;
         fadeOut(timestamp?: number): void;
-        fadeTo(timestamp: number | undefined, target: any): void;
+        fadeTo(timestamp: any, from: any, to: any): void;
     };
 };
 export function safeChain(string: any, obj: any): any;

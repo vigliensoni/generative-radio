@@ -30,10 +30,15 @@ import pieces from './pieces'
 
 const gen = new GenerativeRadio(pieces)
 
-gen.token = '[API token]'
+// Disable play until token is fetched to avoid 401 errors
+const playBtn = document.querySelector('#play')
+playBtn.disabled = true
+fetch('/token')
+  .then(r => r.text())
+  .then(token => { gen.token = token.trim(); playBtn.disabled = false })
 
-// gen.play() should be called after a user gesture (e.g. a click).
-document.addEventListener('click', () => { gen.play() })
+// gen.play() must be called from a user gesture (browser autoplay policy)
+playBtn.addEventListener('click', () => { gen.play() })
 ```
 
 `pieces.js`
@@ -96,6 +101,7 @@ When a field is omitted from the configuration, the following defaults are appli
 | `search.options.results` | `150` | Capped at 150 by the Freesound API |
 | `search.options.filter.duration` | `[0, 60]` | Seconds |
 | `search.options.filter.geotag` | *none* | Bounding box `[min_lat, min_lon, max_lat, max_lon]`; only geotagged sounds are returned |
+| `search.options.filter.geotags` | *none* | Array of bounding boxes; one parallel search per entry, results merged. Use with `_locations` named strings and a `resolveLocations()` pre-processing step (see USAGE.md). |
 | `search.options.sort` | `"rating_desc"` | Highest rated first |
 | `structure.metro` | *none* | Omitting it activates continuous mode |
 | `structure.fade` | `0` | No fade; clamped to max `0.5` |

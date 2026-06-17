@@ -29,7 +29,7 @@ class default_1 {
             this.elementPlayers = this.piece.elements.map((element) => new playElement_1.default(element, this.gain));
             await Promise.any(this.elementPlayers.map((e) => e.play()));
             this.fade.fadeIn();
-            this.stop((0, helpers_1.sec2ms)(globals_1.state.context.currentTime + this.piece.duration));
+            this.stop(this.piece.duration);
         }
     }
     async stop(timestamp) {

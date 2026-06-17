@@ -2,7 +2,7 @@ import {deepMerge, deepClone} from './helpers'
 import {defaults, state} from './globals'
 
 const formattingOptions = (options) => {
-	options.fields = ['username','name','duration','created','url','license','previews', 'tags', 'geotag'].join(',')
+	options.fields = ['id','username','name','duration','created','url','license','previews', 'tags', 'geotag'].join(',')
 	if (options.filter) {
 		if (options.filter.duration) {
 			const dur = (i) => {
@@ -49,21 +49,59 @@ const searchSounds = async (element, options) => {
 const loadElement = async (element) => {
 	if (!element.loaded) {
 		element = deepMerge({}, defaults.element, element)
-		const hasGeotag = element.search.options && element.search.options.filter && element.search.options.filter.geotag
-		const options = formattingOptions(deepClone(element.search.options))
+		const geotags = element.search.options && element.search.options.filter && element.search.options.filter.geotags
 
-		let sounds = await searchSounds(element, options)
+		if (geotags && Array.isArray(geotags)) {
+			const baseOptions = deepClone(element.search.options)
+			delete baseOptions.filter.geotags
 
-		if (hasGeotag && sounds.length < MIN_SOUNDS) {
-			state.debug && console.log(`		geotag returned ${sounds.length} sound(s), retrying without geotag`)
-			const fallbackOptions = deepClone(element.search.options)
-			delete fallbackOptions.filter.geotag
-			const formattedFallback = formattingOptions(fallbackOptions)
-			const fallbackSounds = await searchSounds(element, formattedFallback)
-			sounds = sounds.concat(fallbackSounds)
+			const results = await Promise.all(
+				geotags.map((geotag, i) => {
+					const opts = deepClone(baseOptions)
+					opts.filter.geotag = geotag
+					state.debug && console.log(`		geotag[${i}] specific search: Intersects(${geotag})`)
+					return searchSounds(element, formattingOptions(opts))
+				})
+			)
+			results.forEach((r, i) => state.debug && console.log(`		geotag[${i}] returned ${r.length} sound(s)`))
+			let sounds = results.flat()
+
+			if (sounds.length < MIN_SOUNDS) {
+				state.debug && console.log(`		only ${sounds.length} sound(s) total, broadening search within all locations`)
+				const broadEl = { search: { text: 'recording' } }
+				const broadResults = await Promise.all(
+					geotags.map((geotag, i) => {
+						const opts = deepClone(baseOptions)
+						opts.filter.geotag = geotag
+						state.debug && console.log(`		geotag[${i}] broad fallback: Intersects(${geotag})`)
+						return searchSounds(broadEl, formattingOptions(opts))
+					})
+				)
+				broadResults.forEach((r, i) => state.debug && console.log(`		geotag[${i}] broad returned ${r.length} sound(s)`))
+				const seen = new Set(sounds.map(s => s.id))
+				sounds = sounds.concat(broadResults.flat().filter(s => !seen.has(s.id)))
+			}
+			state.debug && console.log(`		element pool: ${sounds.length} sound(s) from ${geotags.length} location(s)`)
+
+			element.sounds = sounds
+		} else {
+			const hasGeotag = element.search.options && element.search.options.filter && element.search.options.filter.geotag
+			const options = formattingOptions(deepClone(element.search.options))
+
+			let sounds = await searchSounds(element, options)
+
+			if (hasGeotag && sounds.length < MIN_SOUNDS) {
+				state.debug && console.log(`		geotag returned ${sounds.length} sound(s), retrying without geotag`)
+				const fallbackOptions = deepClone(element.search.options)
+				delete fallbackOptions.filter.geotag
+				const formattedFallback = formattingOptions(fallbackOptions)
+				const fallbackSounds = await searchSounds(element, formattedFallback)
+				sounds = sounds.concat(fallbackSounds)
+			}
+
+			element.sounds = sounds
 		}
 
-		element.sounds = sounds
 		element.loaded = true
 	}
 	return element

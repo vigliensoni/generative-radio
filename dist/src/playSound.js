@@ -41,7 +41,7 @@ class default_1 {
         (0, delay_1.default)((0, helpers_1.sec2ms)(this.maxDuration - this.fadeDuration)).then(() => {
             this.fade.fadeOut();
         });
-        (0, delay_1.default)((0, helpers_1.sec2ms)(this.maxDuration)).then(this.stop);
+        (0, delay_1.default)((0, helpers_1.sec2ms)(this.maxDuration)).then(() => this.stop());
         this.onstarted();
         return this.source;
     }
@@ -56,11 +56,10 @@ class default_1 {
         return this.source;
     }
     stop() {
-        if (this) {
+        if (this.active) {
             globals_1.state.debug && console.log('				sound stop');
             this.active = false;
             this.source.stop();
-            this.onended();
         }
     }
 }
