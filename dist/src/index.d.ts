@@ -11,6 +11,7 @@ declare const GenerativeRadio: {
         token: any;
         ontrigger: any;
         debug: any;
+        negativeTags: any;
     };
 };
 import playPieces from "./playPieces";

@@ -47,6 +47,9 @@ const GenerativeRadio = class {
     set debug(val) {
         globals_1.state.debug = val;
     }
+    set negativeTags(tags) {
+        globals_1.state.negativeTags = tags;
+    }
 };
 exports.default = GenerativeRadio;
 //# sourceMappingURL=index.js.map

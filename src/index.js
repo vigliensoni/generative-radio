@@ -46,6 +46,10 @@ const GenerativeRadio = class {
 	set debug(val) {
 		state.debug = val
 	}
+
+	set negativeTags(tags) {
+		state.negativeTags = tags
+	}
 }
 
 export default GenerativeRadio

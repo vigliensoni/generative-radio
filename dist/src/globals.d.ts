@@ -3,6 +3,7 @@ export namespace state {
     const allPlayers: Set<any>;
     const freesound: FreeSound;
     function ontrigger(): void;
+    const negativeTags: string[];
 }
 export namespace defaults {
     namespace element {

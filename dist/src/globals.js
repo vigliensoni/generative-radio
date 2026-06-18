@@ -10,6 +10,7 @@ const state = {
     allPlayers: new Set(),
     freesound: new freesound_client_1.default(),
     ontrigger: () => { },
+    negativeTags: ['distorted'],
 };
 exports.state = state;
 const initState = () => {

@@ -12,16 +12,17 @@
 	},
 	"pieces": [
 		{
-			"_name": "Chile — Day",
+			"_name": "War zones - 2",
 			"elements": [
 				{
 					"search": {
-						"text": "birds nature field recording",
+						"text": "birds nature",
 						"options": {
 							"results": 50,
 							"filter": {
 								"duration": [10, 60],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}
@@ -35,7 +36,8 @@
 							"results": 50,
 							"filter": {
 								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}
@@ -49,7 +51,8 @@
 							"results": 50,
 							"filter": {
 								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}
@@ -63,7 +66,8 @@
 							"results": 100,
 							"filter": {
 								"duration": [10, 45],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}
@@ -77,7 +81,8 @@
 							"results": 100,
 							"filter": {
 								"duration": [5, 25],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}
@@ -98,7 +103,8 @@
 							"results": 50,
 							"filter": {
 								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}
@@ -112,7 +118,8 @@
 							"results": 50,
 							"filter": {
 								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}
@@ -126,7 +133,8 @@
 							"results": 50,
 							"filter": {
 								"duration": [10, 60],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}
@@ -140,7 +148,8 @@
 							"results": 50,
 							"filter": {
 								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}
@@ -154,7 +163,8 @@
 							"results": 100,
 							"filter": {
 								"duration": [5, 30],
-								"geotags": ["Palestine", "Ukraine"]
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
 						}

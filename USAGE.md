@@ -75,6 +75,7 @@ const gen = new GenerativeRadio(pieces)
 | `gen.token = value` | `string` | Sets the Freesound API token. Required before calling `play()`. |
 | `gen.gain = value` | `number` (0–1) | Sets the master output volume. |
 | `gen.debug = value` | `boolean` | Enables verbose console logging of loading and playback (see Debug Logging below). |
+| `gen.negativeTags = value` | `string[]` | Global list of Freesound tags to exclude from every search. Any sound that carries at least one of these tags is removed from the result pool. Applied client-side after fetching, so it does not affect the API query. Combined with any per-element `filter.negativeTags`. |
 | `gen.ontrigger = fn` | `function` | Callback fired every time a sound starts or ends. Receives `{ sound, searchInfo, ended, maxDuration, numPlayers }`. |
 | `gen.playing` | `boolean` (read-only) | Whether playback is currently active. |
 
@@ -150,6 +151,7 @@ An element defines a single sound layer within a piece — what sounds to fetch 
 | `search.options.filter.duration` | `[min, max]` | `[0, 60]` | Duration range in seconds. Use `"*"` for no upper limit, e.g. `[0, "*"]`. |
 | `search.options.filter.geotag` | `[min_lat, min_lon, max_lat, max_lon]` | — | Bounding box for geolocation filtering. Only returns sounds that were geotagged within this rectangle. Coordinates are decimal degrees (WGS 84). |
 | `search.options.filter.geotags` | `array` | — | Array of bounding boxes (each `[min_lat, min_lon, max_lat, max_lon]`). One parallel search is fired per entry and results are merged. Use this to search across multiple locations simultaneously. Requires the `resolveLocations` pre-processing step if using named strings (see below). |
+| `search.options.filter.negativeTags` | `string[]` | — | Tags to exclude from this element's sound pool. Any sound carrying at least one of these tags is removed after fetching. Applied client-side; does not affect the API query. Merged with the global `gen.negativeTags` list at runtime. |
 | `search.options.sort` | `string` | `"rating_desc"` | Sort order for results. Highest rated first by default. |
 | `search.options.tags` | `string` | — | Filter results by Freesound tags. Optional. |
 
@@ -317,6 +319,38 @@ Best for: percussive layers, periodic accents, rhythmic patterns.
 
 In rhythmic mode, setting `mono: true` ensures each new trigger replaces the previous sound. When `mono: false` (the default), sounds accumulate and overlap, creating denser textures as the piece progresses.
 
+## Negative Tag Filtering
+
+Sounds can be excluded from the result pool based on their Freesound tags. Filtering is applied client-side after fetching, so it does not affect the API query or count toward the `results` limit.
+
+Two scopes are available and are merged at runtime:
+
+**Global** — applied to every element in every piece:
+
+```javascript
+gen.negativeTags = ['distorted', 'noise', 'clipping']
+```
+
+**Per-element** — set in the JSON config under `filter.negativeTags`:
+
+```json
+{
+  "search": {
+    "text": "birds nature",
+    "options": {
+      "filter": {
+        "duration": [10, 60],
+        "negativeTags": ["battle", "war", "military", "weapon", "gun", "explosion"]
+      }
+    }
+  }
+}
+```
+
+Both lists are combined. A sound is excluded if any of its tags matches any tag in either list. Tag matching is case-sensitive and exact (e.g., `"war"` excludes sounds tagged `"war"` but not `"warfare"` — list both if needed).
+
+Because filtering reduces the effective pool size, use `results` values higher than you'd otherwise need, especially when the negative list is long.
+
 ## Audio Signal Chain
 
 The Web Audio API graph is structured as a chain of gain nodes, each providing independent volume and fade control:
@@ -330,7 +364,7 @@ Fades at every level use `linearRampToValueAtTime` for smooth transitions. (`exp
 
 ## Piece Sequencing
 
-Pieces play in a shuffled order using a no-repetition algorithm — the same piece won't play twice in a row. When a piece ends (after its `duration + 2 × fade`), the next one is selected and begins loading. The sequence loops indefinitely until `gen.stop()` is called.
+Pieces play in a shuffled order using a no-repetition algorithm — the same piece won't play twice in a row. When a piece ends (after its `duration + fade`), the next one is selected and begins loading. The sequence loops indefinitely until `gen.stop()` is called.
 
 ## Sound Selection
 

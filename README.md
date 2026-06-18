@@ -102,6 +102,8 @@ When a field is omitted from the configuration, the following defaults are appli
 | `search.options.filter.duration` | `[0, 60]` | Seconds |
 | `search.options.filter.geotag` | *none* | Bounding box `[min_lat, min_lon, max_lat, max_lon]`; only geotagged sounds are returned |
 | `search.options.filter.geotags` | *none* | Array of bounding boxes; one parallel search per entry, results merged. Use with `_locations` named strings and a `resolveLocations()` pre-processing step (see USAGE.md). |
+| `search.options.filter.negativeTags` | *none* | Tags to exclude from this element's pool (client-side, after fetching). Merged with `gen.negativeTags`. |
+| `gen.negativeTags` | `[]` | Global tag exclusion list applied to every element. |
 | `search.options.sort` | `"rating_desc"` | Highest rated first |
 | `structure.metro` | *none* | Omitting it activates continuous mode |
 | `structure.fade` | `0` | No fade; clamped to max `0.5` |

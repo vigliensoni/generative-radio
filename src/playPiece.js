@@ -32,7 +32,7 @@ export default class {
 
 	async stop(timestamp){
 		this.fade.fadeOut(timestamp)
-		await delay(sec2ms(this.piece.duration + 2*this.piece.fade))
+		await delay(sec2ms(this.piece.duration + this.piece.fade))
 		state.debug && console.log('		piece stop')
 		this.playing = false
 		this.elementPlayers.forEach((player) => player.stop())

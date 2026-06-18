@@ -18,6 +18,7 @@ const formattingOptions = (options) => {
 		if (options.results) {
 			options.page_size = (options.results > 150) ? 150 : options.results
 		}
+		delete options.filter.negativeTags
 		const filterString = Object.entries(options.filter)
 			.map(([key, value]) => `${key}:${value}`).join(' ')
 		options.filter = filterString
@@ -34,16 +35,23 @@ const searchSounds = async (element, options) => {
 				element.search.text,
 				options
 			)
-			return results
+			return results || []
 		} else if (element.search.sound !== undefined) {
 			const sound = await state.freesound.getSound(element.search.sound)
 			const {results} = await sound.getSimilar(options)
-			return results
+			return results || []
 		}
 	} catch (e) {
 		state.debug && console.warn('		search failed:', e.message || e)
 	}
 	return []
+}
+
+const applyNegativeTags = (sounds, element) => {
+	const elementNegTags = element.search.options?.filter?.negativeTags || []
+	const allNegTags = new Set([...elementNegTags, ...(state.negativeTags || [])])
+	if (allNegTags.size === 0) return sounds
+	return sounds.filter(sound => !sound.tags || !sound.tags.some(tag => allNegTags.has(tag)))
 }
 
 const loadElement = async (element) => {
@@ -63,7 +71,7 @@ const loadElement = async (element) => {
 					return searchSounds(element, formattingOptions(opts))
 				})
 			)
-			results.forEach((r, i) => state.debug && console.log(`		geotag[${i}] returned ${r.length} sound(s)`))
+			results.forEach((r, i) => state.debug && console.log(`		geotag[${i}] returned ${r?.length ?? 0} sound(s)`))
 			let sounds = results.flat()
 
 			if (sounds.length < MIN_SOUNDS) {
@@ -77,13 +85,13 @@ const loadElement = async (element) => {
 						return searchSounds(broadEl, formattingOptions(opts))
 					})
 				)
-				broadResults.forEach((r, i) => state.debug && console.log(`		geotag[${i}] broad returned ${r.length} sound(s)`))
+				broadResults.forEach((r, i) => state.debug && console.log(`		geotag[${i}] broad returned ${r?.length ?? 0} sound(s)`))
 				const seen = new Set(sounds.map(s => s.id))
 				sounds = sounds.concat(broadResults.flat().filter(s => !seen.has(s.id)))
 			}
-			state.debug && console.log(`		element pool: ${sounds.length} sound(s) from ${geotags.length} location(s)`)
 
-			element.sounds = sounds
+			element.sounds = applyNegativeTags(sounds, element)
+			state.debug && console.log(`		element pool: ${element.sounds.length} sound(s) from ${geotags.length} location(s)`)
 		} else {
 			const hasGeotag = element.search.options && element.search.options.filter && element.search.options.filter.geotag
 			const options = formattingOptions(deepClone(element.search.options))
@@ -99,7 +107,7 @@ const loadElement = async (element) => {
 				sounds = sounds.concat(fallbackSounds)
 			}
 
-			element.sounds = sounds
+			element.sounds = applyNegativeTags(sounds, element)
 		}
 
 		element.loaded = true

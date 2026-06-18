@@ -5,6 +5,7 @@ const state = {
 	allPlayers: new Set(),
 	freesound: new FreeSound(),
 	ontrigger: () => {},
+	negativeTags: ['distorted'],
 }
 
 const initState = () => {
