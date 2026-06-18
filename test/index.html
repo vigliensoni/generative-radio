@@ -19,7 +19,6 @@
 
   <div class="player" id="player">
     <div class="top-bar">
-      <div class="now-location" id="nowLocation"></div>
       <button class="fullscreen-btn" id="fullscreenBtn" title="Fullscreen">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M4 14v4a2 2 0 002 2h4M20 14v4a2 2 0 01-2 2h-4M4 10V6a2 2 0 012-2h4M20 10V6a2 2 0 00-2-2h-4"/>
@@ -141,20 +140,6 @@
     flex-shrink: 0;
   }
 
-  .now-location {
-    font-size: clamp(0.7rem, 2vw, 1.4rem);
-    font-weight: 200;
-    letter-spacing: 0.5em;
-    color: #222;
-    text-transform: uppercase;
-    transition: color 2s ease;
-    flex: 1;
-  }
-
-  .now-location.active {
-    color: #4a4a4a;
-  }
-
   .fullscreen-btn {
     background: none;
     border: 1px solid #1a1a1a;
@@ -232,41 +217,41 @@
     display: block;
     font-size: clamp(0.5rem, 1vw, 0.72rem);
     font-weight: 300;
-    color: #666;
+    color: #888;
     letter-spacing: 0.05em;
     line-height: 1.8;
   }
 
   .log-line .location-tag {
-    color: #999;
+    color: #ccc;
     font-weight: 400;
   }
 
   .log-line .coords-tag {
-    color: #555;
+    color: #888;
     font-weight: 300;
     font-variant-numeric: tabular-nums;
   }
 
   .log-line .search-tag {
-    color: #444;
+    color: #777;
     font-style: italic;
   }
 
   .log-line .duration-tag {
-    color: #555;
+    color: #999;
   }
 
   .log-line .username-tag {
-    color: #3a3a3a;
+    color: #777;
   }
 
   .log-line .year-tag {
-    color: #3a3a3a;
+    color: #666;
   }
 
   .log-line .license-tag {
-    color: #2e2e2e;
+    color: #666;
     font-style: italic;
   }
 
@@ -280,10 +265,10 @@
   .log-line .tag {
     font-size: clamp(0.4rem, 0.7vw, 0.52rem);
     font-weight: 300;
-    color: #2e2e2e;
+    color: #666;
     letter-spacing: 0.04em;
     padding: 0.15em 0.5em;
-    border: 1px solid #1c1c1c;
+    border: 1px solid #3a3a3a;
   }
 
   .progress-bar {

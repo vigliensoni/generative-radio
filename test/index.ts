@@ -66,7 +66,6 @@ const geotagToCoords = (geotag: string | null): string => {
 }
 
 const logContainer = document.getElementById('logContainer')!
-const nowLocation = document.getElementById('nowLocation')!
 
 interface SoundEntry {
 	line: HTMLElement
@@ -102,7 +101,7 @@ const showSound = (sound: any, query: string, location: string, coords: string, 
 	const durationPart = `<span class="duration-tag">${duration}s</span>`
 	const userPart = username ? ` · <span class="username-tag">by ${username}</span>` : ''
 	const yearPart = created ? ` · <span class="year-tag">${created.slice(0, 4)}</span>` : ''
-	const licensePart = license ? ` · <span class="license-tag">${license.replace('http://creativecommons.org/licenses/', 'CC ').replace(/\/.*/, '').toUpperCase()}</span>` : ''
+	const licensePart = license ? ` · <span class="license-tag">${license.replace(/https?:\/\/creativecommons\.org\/licenses\//, 'CC ').replace(/\/.*/, '').toUpperCase()}</span>` : ''
 
 	const nameHtml = url
 		? `<a class="sound-name" href="${url}" target="_blank" rel="noopener">${sound.name}</a>`
@@ -123,10 +122,6 @@ const showSound = (sound: any, query: string, location: string, coords: string, 
 	const fill = line.querySelector('.progress-fill') as HTMLElement
 	activeSounds.set(sound, {line, fill, startTime: performance.now(), duration: playDuration})
 
-	if (location) {
-		nowLocation.textContent = location
-		nowLocation.classList.add('active')
-	}
 }
 
 const clearSound = (sound: any) => {
@@ -177,8 +172,6 @@ document.getElementById('stopBtn')!.addEventListener('click', () => {
 	player.classList.remove('visible')
 	logContainer.innerHTML = ''
 	activeSounds.clear()
-	nowLocation.textContent = ''
-	nowLocation.classList.remove('active')
 })
 
 document.getElementById('volume')!
