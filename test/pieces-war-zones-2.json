@@ -20,8 +20,8 @@
 						"options": {
 							"results": 50,
 							"filter": {
-								"duration": [10, 60],
-								"geotags": ["Palestine", "Ukraine"],
+								"duration": [10, 120],
+								"geotags": ["Palestine", "Sudan"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
@@ -36,7 +36,7 @@
 							"results": 50,
 							"filter": {
 								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"],
+								"geotags": ["Palestine", "Yemen"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
@@ -50,8 +50,8 @@
 						"options": {
 							"results": 50,
 							"filter": {
-								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"],
+								"duration": [15, 120],
+								"geotags": ["Palestine", "Syria"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
@@ -65,8 +65,8 @@
 						"options": {
 							"results": 100,
 							"filter": {
-								"duration": [10, 45],
-								"geotags": ["Palestine", "Ukraine"],
+								"duration": [10, 60],
+								"geotags": ["Palestine", "DR Congo"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
@@ -80,8 +80,8 @@
 						"options": {
 							"results": 100,
 							"filter": {
-								"duration": [5, 25],
-								"geotags": ["Palestine", "Ukraine"],
+								"duration": [5, 60],
+								"geotags": ["Palestine", "Sudan"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
@@ -102,8 +102,8 @@
 						"options": {
 							"results": 50,
 							"filter": {
-								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"],
+								"duration": [15, 120],
+								"geotags": ["Palestine", "Yemen"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
@@ -118,7 +118,7 @@
 							"results": 50,
 							"filter": {
 								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"],
+								"geotags": ["Palestine", "Myanmar"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
@@ -133,7 +133,7 @@
 							"results": 50,
 							"filter": {
 								"duration": [10, 60],
-								"geotags": ["Palestine", "Ukraine"],
+								"geotags": ["Palestine", "Syria"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
@@ -147,8 +147,8 @@
 						"options": {
 							"results": 50,
 							"filter": {
-								"duration": [15, 60],
-								"geotags": ["Palestine", "Ukraine"],
+								"duration": [15, 120],
+								"geotags": ["Palestine", "Ethiopia"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
 							"sort": "rating_desc"
@@ -162,7 +162,7 @@
 						"options": {
 							"results": 100,
 							"filter": {
-								"duration": [5, 30],
+								"duration": [5, 60],
 								"geotags": ["Palestine", "Ukraine"],
 								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
 							},
