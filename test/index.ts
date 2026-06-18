@@ -101,7 +101,8 @@ const showSound = (sound: any, query: string, location: string, coords: string, 
 	const durationPart = `<span class="duration-tag">${duration}s</span>`
 	const userPart = username ? ` · <span class="username-tag">by ${username}</span>` : ''
 	const yearPart = created ? ` · <span class="year-tag">${created.slice(0, 4)}</span>` : ''
-	const licensePart = license ? ` · <span class="license-tag">${license.replace(/https?:\/\/creativecommons\.org\/publicdomain\/.*/, 'CC0').replace(/https?:\/\/creativecommons\.org\/licenses\//, 'CC ').replace(/\/.*/, '').toUpperCase()}</span>` : ''
+	const licenseLabel = license.includes('/publicdomain/') ? 'CC0' : license.replace(/https?:\/\/creativecommons\.org\/licenses\//, 'CC ').replace(/\/.*/, '').toUpperCase()
+		const licensePart = license ? ` · <span class="license-tag">${licenseLabel}</span>` : ''
 
 	const nameHtml = url
 		? `<a class="sound-name" href="${url}" target="_blank" rel="noopener">${sound.name}</a>`
