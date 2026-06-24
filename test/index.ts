@@ -2,7 +2,8 @@ import Generative from '../dist/src/index'
 // import rawPieces from './pieces-montreal.json'
 // import rawPieces from './pieces-palestine.json'
 // import rawPieces from './pieces-war-zones.json'
-import rawPieces from './pieces-war-zones-2.json'
+// import rawPieces from './pieces-war-zones-2.json'
+import rawPieces from './pieces-war-zones-3.json'
 
 const resolveLocations = (config: any) => {
 	const locs: Record<string, number[]> = config._locations || {}

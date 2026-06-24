@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="overlay" id="overlay">
     <div class="title">FIELD</div>
-    <div class="subtitle">before | after </div>
+    <div class="subtitle">before | after</div>
     <button class="start" id="startBtn">LISTEN</button>
   </div>
 
@@ -71,36 +71,11 @@
     transition: opacity 2s ease, visibility 2s ease;
   }
 
-  .overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .title {
-    font-size: clamp(1.8rem, 8vw, 7rem);
-    font-weight: 200;
-    letter-spacing: 0.4em;
-    color: #fff;
-    margin-bottom: 0.3em;
-    text-align: center;
-  }
-
-  .subtitle {
-    font-size: clamp(0.8rem, 2.5vw, 1.8rem);
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    color: #555;
-    text-transform: lowercase;
-    margin-bottom: 4em;
-    text-align: center;
-  }
-
   .start {
     background: none;
     border: 1px solid #333;
     color: #999;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 300;
     font-size: clamp(0.9rem, 2vw, 1.5rem);
     letter-spacing: 0.5em;
@@ -113,6 +88,33 @@
     border-color: #999;
     color: #fff;
     background: rgba(255, 255, 255, 0.04);
+  }
+
+  .overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 8vw, 7rem);
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    color: #fff;
+    margin-bottom: 0.3em;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(0.8rem, 2.5vw, 1.8rem);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: #777;
+    text-transform: lowercase;
+    margin-bottom: 4em;
+    text-align: center;
   }
 
   /* --- PLAYER VIEW --- */
@@ -217,41 +219,41 @@
     display: block;
     font-size: clamp(0.5rem, 1vw, 0.72rem);
     font-weight: 300;
-    color: #888;
+    color: #bbb;
     letter-spacing: 0.05em;
     line-height: 1.8;
   }
 
   .log-line .location-tag {
-    color: #ccc;
+    color: #eee;
     font-weight: 400;
   }
 
   .log-line .coords-tag {
-    color: #888;
+    color: #bbb;
     font-weight: 300;
     font-variant-numeric: tabular-nums;
   }
 
   .log-line .search-tag {
-    color: #777;
+    color: #aaa;
     font-style: italic;
   }
 
   .log-line .duration-tag {
-    color: #999;
+    color: #ccc;
   }
 
   .log-line .username-tag {
-    color: #777;
+    color: #aaa;
   }
 
   .log-line .year-tag {
-    color: #666;
+    color: #999;
   }
 
   .log-line .license-tag {
-    color: #666;
+    color: #999;
     font-style: italic;
   }
 
@@ -265,10 +267,10 @@
   .log-line .tag {
     font-size: clamp(0.4rem, 0.7vw, 0.52rem);
     font-weight: 300;
-    color: #666;
+    color: #999;
     letter-spacing: 0.04em;
     padding: 0.15em 0.5em;
-    border: 1px solid #3a3a3a;
+    border: 1px solid #555;
   }
 
   .progress-bar {

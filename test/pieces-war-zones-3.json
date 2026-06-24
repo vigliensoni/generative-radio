@@ -1,0 +1,179 @@
+{
+	"_locations": {
+		"Palestine": [31.0, 34.0, 33.0, 36.0],
+		"Ukraine":   [44.0, 22.0, 53.0, 41.0],
+		"Sudan":     [8.0,  21.0, 23.0, 39.0],
+		"Yemen":     [12.0, 42.0, 19.0, 55.0],
+		"Myanmar":   [9.0,  92.0, 29.0, 102.0],
+		"Syria":     [32.0, 35.0, 38.0, 43.0],
+		"Ethiopia":  [5.0,  32.0, 16.0, 48.0],
+		"DR Congo":  [-6.0, 26.0, 3.0,  32.0],
+		"Chile": [-56.0, -75.5, -17.5, -66.0]
+	},
+	"pieces": [
+		{
+			"_name": "War zones - 2",
+			"elements": [
+				{
+					"search": {
+						"text": "birds nature",
+						"options": {
+							"results": 10,
+							"filter": {
+								"duration": [10, 120],
+								"geotags": ["Palestine", "Sudan"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "water river rain ocean waves",
+						"options": {
+							"results": 10,
+							"filter": {
+								"duration": [15, 60],
+								"geotags": ["Palestine", "Yemen"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "wind mountain forest ambience",
+						"options": {
+							"results": 10,
+							"filter": {
+								"duration": [15, 120],
+								"geotags": ["Palestine", "Syria"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "market street crowd voices",
+						"options": {
+							
+							"filter": {
+								"duration": [10, 60],
+								"geotags": ["Palestine", "DR Congo"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 20, "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "children playing laughing",
+						"options": {
+							
+							"filter": {
+								"duration": [5, 60],
+								"geotags": ["Palestine", "Sudan"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 12, "fade": 0.2 }
+				}
+			],
+			"duration": 180,
+			"fade": 25
+		},
+		{
+			"_name": "Palestine — Night",
+			"elements": [
+				{
+					"search": {
+						"text": "insects crickets night outdoor",
+						"options": {
+							"results": 10,
+							"filter": {
+								"duration": [15, 120],
+								"geotags": ["Palestine", "Yemen"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "wind ambience outdoor",
+						"options": {
+							"results": 10,
+							"filter": {
+								"duration": [15, 60],
+								"geotags": ["Palestine", "Myanmar"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.15 }
+				},
+				{
+					"search": {
+						"text": "fire campfire crackling",
+						"options": {
+							"results": 10,
+							"filter": {
+								"duration": [10, 60],
+								"geotags": ["Palestine", "Syria"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "rain storm thunder",
+						"options": {
+							"results": 10,
+							"filter": {
+								"duration": [15, 120],
+								"geotags": ["Palestine", "Ethiopia"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "fade": 0.2 }
+				},
+				{
+					"search": {
+						"text": "voices conversation distant",
+						"options": {
+							"results": 10,
+							"filter": {
+								"duration": [5, 60],
+								"geotags": ["Palestine", "Ukraine"],
+								"negativeTags": ["battle", "ww2", "bang", "boom", "army", "airstrike", "attack", "bombing", "drone", "explosion", "combat", "raid", "gun", "military", "soldier", "war", "warfare", "weapon", "rifle", "shoot", "police"]
+							},
+							"sort": "rating_desc"
+						}
+					},
+					"structure": { "metro": 25, "fade": 0.25 }
+				}
+			],
+			"duration": 180,
+			"fade": 25
+		}
+	]
+}
